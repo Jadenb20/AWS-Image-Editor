@@ -1,3 +1,6 @@
 .DS_Store
 AWS-Amplify-Updated-Code/
 AWS-Amplify-Updated-Code.zip
+.ipynb_checkpoints/
+.jupyter/
+.virtual_documents/
