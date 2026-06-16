@@ -1,0 +1,255 @@
+body {
+    background-color: #0d0d0d;
+    font-family: "Source Code Pro" monospace;
+    color: #00ff00;
+    padding: 20px;
+}
+
+canvas {
+    border: 0px solid #00ff00;
+}
+
+.main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    min-width: min-content;
+    border: solid;
+    padding: 10px;
+}
+
+.left .editor,
+.left .result {
+    position: relative;
+}
+
+.right {
+    width: 50%;
+    height: 100%;
+    padding-left: 10px;
+    border-left: 2px dotted #00ff00;
+    overflow-x: auto; /* Add this line */
+}
+
+.debugger {
+    height: 100%;
+    padding-right: 2px;
+}
+
+.terminal {
+    background-color: #000000;
+    padding: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 5px;
+}
+
+.terminal-header {
+    color: #00ff00;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.terminal-text {
+    color: #00ff00;
+    font-family: monospace;
+}
+
+.terminal-input {
+    background-color: #000000;
+    color: #ffbf00;
+    border: 1px solid #00ff00;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-family: monospace;
+    width: 100%;
+}
+
+.terminal-button {
+    background-color: #000000;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    padding: 5px 10px;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.terminal-box {
+    background-color: #000000;
+    border: 1px solid #00ff00;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.cognito-form {
+    background-color: #000000;
+    border: 1px solid #00ff00;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cognito-form input {
+    background-color: #000000;
+    color: #ffbf00;
+    border: 1px solid #00ff00;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-family: monospace;
+}
+
+.cognito-form > h3 {
+  width: 100%;
+}
+
+.loginFormItem {
+  display: flex;
+  margin-right: 15px; /* Adjust the spacing between items as needed */
+}
+
+.loginFormInputLabel {
+  margin-right: 5px;
+  width: 80px;
+  padding-top: 5px;
+  display: inline-block;
+}
+
+.loginFormInputValue {
+  margin-right: 5px; 
+  display: inline-block;
+}
+
+#loginForm {
+  display: inherit;
+}
+
+code span {
+  color: #ffbf00;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 5px solid #ccc;
+  border-top-color: #333;
+  animation: spin 1s ease-in-out infinite;
+}
+
+.stroke-control {
+    font-size: large;
+    padding: 10px;
+    align-content: center;
+    text-align: center;
+}
+
+#loginFormMessages {
+  color: #ffbf00;
+  padding-top: 20px;
+  text-align: left;
+  align-content: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#errorDismissBtn {
+  display: none;
+}
+
+/* Styles for mobile devices with vertical screen orientation */
+@media (max-width: 920px), (orientation: portrait) {
+  body {
+      background-color: #0d0d0d;
+      font-family: "Source Code Pro" monospace;
+      color: #00ff00;
+      padding: 2px;
+  }
+  .terminal {
+      background-color: #000000;
+      padding: 2px;
+      border: 2px solid #00ff00;
+      border-radius: 5px;
+  }
+  
+  #prompt{
+    padding-right: 0px;
+    width: 98%;
+  }
+  
+  .right {
+    width: 0px;
+    height: 0px;
+    border: 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0px;
+  }
+  
+  .left {
+    width: 100%
+  }
+  
+  #error_messages {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+  }
+  
+  #api_payload {
+    display: none;
+  }
+  
+  #loginFormMessages {
+    color: #ffbf00;
+    padding: 5px;
+    text-align: center;
+    align-content: center;
+  }
+  
+  #dbg_errors {
+    padding-bottom: 10px;
+  }
+  
+  #errorDismissBtn {
+    padding: 5px;
+    text-align: center;
+    border: 2px;
+    border-color: #00ff00;
+    border-style: solid;
+    display: block;
+  }
+  
+  .cognito-form {
+    display: block;
+  }
+  
+  .loginFormItem {
+    margin-top: 4px;
+  }
+  
+  .loginFormItem > button {
+    margin-top: 10px;
+  }
+  
+}

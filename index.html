@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://sdk.amazonaws.com/js/aws-sdk-2.244.1.min.js https://*.amazonaws.com https://*.amazon.com 'unsafe-inline' 'unsafe-eval'; connect-src 'self' https://*.amazonaws.com https://*.amazon.com; img-src 'self' data: blob:; upgrade-insecure-requests;">
+  <title>Image Editing Tool</title>
+  <script src="./js/config.js"></script>
+  <script src="./js/global.js"></script>
+  <script src="./js/image-manipulation.js"></script>
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.244.1.min.js"></script>
+  <script src="./js/aws/amazon-cognito-identity.min.js"></script>
+  <script src="./js/api.js"></script>
+  <style>
+    @import url("./styles.css");
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <h1 class="terminal-header">Image Editing Tool</h1>
+    <div class="cognito-form">
+      <h3 class="terminal-text">Job Zero: Use your Amazon Cognito credentials before proceeding</h2>
+      <div id="loginForm">
+        <div class="loginFormItem">
+          <div class="loginFormInputLabel"><label for="username">User Name: </label></div>
+          <div class="loginFormInputValue">
+            <input type="text" id="cognito-username">
+          </div>
+        </div>
+        <div class=loginFormItem>
+          <div class="loginFormInputLabel">
+            <label for="password">Password: </label>
+          </div>
+          <div class="loginFormInputValue">
+            <input type="password" id="cognito-password">
+          </div>
+        </div>
+        <div class="loginFormItem">
+          <button id="loginBtn" class="terminal-button">
+            <span class="loading-container">
+              <span id="btnText">Login</span>&nbsp;
+              <span class="loading-spinner" id="login-spinner" style="display: none;"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div id="loginPasswordConfirmationForm" style="display: none;">
+        <h4>Cognito requires for you to set a new password</h4>
+        <div class="loginFormItem">
+          <div class="loginFormInputLabel">
+            <label for="password">New password: </label>
+          </div>
+          <div class="loginFormInputValue">
+            <input type="password" id="cognito-new-password">
+          </div>
+        </div>
+        <div class="loginFormItem">
+          <div class="loginFormInputLabel">
+            <label for="password">Confirm new password: </label>
+          </div>
+          <div class="loginFormInputValue">
+            <input type="password" id="cognito-new-password-2">
+          </div>
+        </div>
+        <div class="loginFormItem">
+          <button id="newPassBtn" class="terminal-button">
+            <span class="loading-container">
+              <span id="btnText">Confirm</span>&nbsp;
+              <span class="loading-spinner" id="confirm-spinner" style="display: none;"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div id="loginFormMessages" style="display: none;">
+        Authentication successful. JWT token granted.
+      </div>
+    </div>
+    <div class="main">
+      <div class="left">
+        <div class="toolbar">
+            <h2 class="terminal-text">Step 1 - Create a mask on your image</h2>
+            <label for="file-input" class="terminal-text">Load file: </label>
+            <input type="file" id="file-input" accept="image/*" class="terminal-input">
+            <div class="toolbar terminal-text stroke-control">
+              <label>Stroke size</label>
+              <button id="btnDecreaseStroke">-</button>
+              <span id="strokeSizeIndicator">0</span>
+              <button id="btnIncreaseStroke">+</button>
+            </div>
+        </div>
+        <div class="editor top terminal-box">
+            <div id="image-container"></div>
+        </div>
+        <div class="toolbar">
+            <h2 class="terminal-text">Step 2 - Write your prompt and set your options</h2>
+            <textarea type="textarea" id="prompt" class="terminal-input"></textarea>
+            <div class="actions">
+              <select id="mode" class="terminal-button">
+                  <option value="INPAINTING" selected>Inpaint</option>
+                  <option value="OUTPAINTING">Outpaint</option>
+              </select>
+              <button id="sendAPIRequestBtn" class="terminal-button">
+                <span class="loading-container">
+                  <span id="btnText">Send to API</span>&nbsp;
+                <span class="loading-spinner" id="spinner" style="display: none;"></span>
+              </span>
+              </button>
+            </div>
+        </div>
+        <div class="toolbar">
+            <h2 class="terminal-text">Step 3 - View and download the result</h2>
+            <button id="getImageBtn" class="terminal-button">Download Results</button>
+            <span id="downloadMessage" style="display:none;">Images are being stored in your download folder</span>
+        </div>
+        <div class="result bottom terminal-box" id="response-canvas-container">
+        </div>
+      </div>
+      <div class="right terminal-box">
+        <div class="terminal-box" style="display: none" id="error_messages">
+          <h2 class="terminal-text">Error:</h2>
+          <code class="debugger terminal-text" id="dbg_errors">
+          </code>
+          <br><br>
+          <span id="errorDismissBtn">Click here or swipe up to dismiss...</span>
+        </div>
+        <div id="api_payload">
+          <h2 class="terminal-text">API payload to be sent</h2>
+          <code class="debugger terminal-text" id="dbg_view">
+          </code>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <script src="./js/script.js"></script>
+  <script src="./js/cognito-authentication.js"></script>
+</body>
+</html>
